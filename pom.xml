@@ -16,9 +16,9 @@
         </snapshotRepository>
     </distributionManagement>
     <scm>
-        <connection>scm:git:ssh://git@github.com:pramoth/typescript-generator-plugin-extension.git</connection>
-        <developerConnection>scm:git:ssh://git@github.com:pramoth/typescript-generator-plugin-extension.git</developerConnection>
-        <url>scm:git:ssh://git@github.com:pramoth/typescript-generator-plugin-extension.git</url>
+        <connection>scm:git:git@github.com:pramoth/typescript-generator-plugin-extension.git</connection>
+        <developerConnection>scm:git:git@github.com:pramoth/typescript-generator-plugin-extension.git</developerConnection>
+        <url>scm:git:git@github.com:pramoth/typescript-generator-plugin-extension.git</url>
         <tag>typescript-generator-plugin-extension-1.0.0</tag>
     </scm>
     <dependencies>
