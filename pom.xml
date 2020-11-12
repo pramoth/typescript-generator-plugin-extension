@@ -18,9 +18,9 @@
         </snapshotRepository>
     </distributionManagement>
     <scm>
-        <connection>scm:git:ssh://git@git.geniustree.io:8022/nhso/hra.git</connection>
-        <developerConnection>scm:git:ssh://git@git.geniustree.io:8022/nhso/hra.git</developerConnection>
-        <url>scm:git:ssh://git@git.geniustree.io:8022/nhso/hra.git</url>
+        <connection>scm:git:ssh://git@github.com:pramoth/typescript-generator-plugin-extension.git</connection>
+        <developerConnection>scm:git:ssh://git@github.com:pramoth/typescript-generator-plugin-extension.git</developerConnection>
+        <url>scm:git:ssh://git@github.com:pramoth/typescript-generator-plugin-extension.git</url>
         <tag>HEAD</tag>
     </scm>
     <dependencies>
