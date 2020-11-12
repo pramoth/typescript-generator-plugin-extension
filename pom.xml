@@ -4,7 +4,7 @@
 
     <groupId>th.co.geniustree.typescript</groupId>
     <artifactId>typescript-generator-plugin-extension</artifactId>
-    <version>1.0.0-SNAPSHOT</version>
+    <version>1.0.0</version>
     <distributionManagement>
         <repository>
             <id>Geniustree Release</id>
