@@ -1,6 +1,7 @@
 package th.co.geniustree.typescript;
 
 import cz.habarta.typescript.generator.Settings;
+import cz.habarta.typescript.generator.compiler.SymbolTable;
 import cz.habarta.typescript.generator.emitter.EmitterExtension;
 import cz.habarta.typescript.generator.emitter.EmitterExtensionFeatures;
 import cz.habarta.typescript.generator.emitter.TsModel;
@@ -18,5 +19,12 @@ public class EnumTypeAliasExtension extends EmitterExtension {
     public void emitElements(Writer writer, Settings settings, boolean exportKeyword, TsModel model) {
         String enums = model.getTypeAliases().stream().map(e -> "\""+e.getName().getSimpleName()+"\"").collect(Collectors.joining(" | "));
         writer.writeIndentedLine("export type AllEnumClass = "+enums);
+        writer.writeIndentedLine("// Generate FomrFileType for Aqua Project");
+        model.getOriginalStringEnums().stream().filter(e->e.getName().getSimpleName().endsWith("FileType")).forEach(e->{
+            String body = e.getMembers().stream().map(m -> "  "+m.getPropertyName() + ": {fileType: '" + m.getEnumValue() + "' }").collect(Collectors.joining(",\n"));
+            String instanceType = e.getName().getSimpleName()+"Instance";
+            writer.writeIndentedLine("export type "+instanceType+" = { readonly [P in "+e.getName().getSimpleName()+"]: {readonly fileType: "+e.getName().getSimpleName()+"} }");
+            writer.writeIndentedLine("export const  "+e.getName().getSimpleName()+": "+instanceType+" = { \n"+body +" \n} ");
+        });
     }
 }
