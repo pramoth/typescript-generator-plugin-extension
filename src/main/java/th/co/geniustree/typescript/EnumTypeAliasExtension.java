@@ -23,8 +23,9 @@ public class EnumTypeAliasExtension extends EmitterExtension {
         model.getOriginalStringEnums().stream().filter(e->e.getName().getSimpleName().endsWith("FileType")).forEach(e->{
             String body = e.getMembers().stream().map(m -> "  "+m.getPropertyName() + ": {fileType: '" + m.getEnumValue() + "' }").collect(Collectors.joining(",\n"));
             String instanceType = e.getName().getSimpleName()+"InstanceType";
-            writer.writeIndentedLine("export type "+instanceType+" = { readonly [P in "+e.getName().getSimpleName()+"]: {readonly fileType: "+e.getName().getSimpleName()+"} }");
-            writer.writeIndentedLine("export const  "+StringUtils.camelCaseToUnderscores(e.getName().getSimpleName()).toUpperCase()+": "+instanceType+" = { \n"+body +" \n} ");
+            writer.writeIndentedLine("export type "+instanceType+" = {[P in "+e.getName().getSimpleName()+"]: {fileType: "+e.getName().getSimpleName()+"} }");
+            writer.writeIndentedLine("export function  create"+e.getName().getSimpleName()+"(): "+instanceType+" { \nreturn {\n"+body);
+            writer.writeIndentedLine(" }\n}");
         });
     }
 }
