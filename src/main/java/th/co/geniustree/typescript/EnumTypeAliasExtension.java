@@ -35,7 +35,7 @@ public class EnumTypeAliasExtension extends EmitterExtension {
                     if (enumObject == null) {
                         return "//skip " + e.getName().getSimpleName()+ " because it not have getValue() method";
                     } else {
-                        return "export const " + e.getOrigin().getSimpleName()+ " = {\n" + enumObject + "\n}";
+                        return "export const " + e.getOrigin().getSimpleName()+ " : {[p in "+e.getName().getSimpleName()+"] : string } = {\n" + enumObject + "\n}";
                     }
                 }).collect(Collectors.joining("\n"));
         writer.writeIndentedLine(result);
