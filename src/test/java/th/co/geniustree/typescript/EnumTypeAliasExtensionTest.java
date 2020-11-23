@@ -10,7 +10,7 @@ public class EnumTypeAliasExtensionTest {
     public void test(){
         final Settings settings = TestUtils.settings();
         settings.extensions.add(new EnumTypeAliasExtension());
-        final String output = new TypeScriptGenerator(settings).generateTypeScript(Input.from(LicensingForm1FileType.class));
+        final String output = new TypeScriptGenerator(settings).generateTypeScript(Input.from(FormType.class));
         System.out.println(output);
     }
 }

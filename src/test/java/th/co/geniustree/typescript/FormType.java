@@ -1,6 +1,9 @@
 package th.co.geniustree.typescript;
 
-public enum FormType {
+
+import th.co.geniustree.dof.eaquafeed.web.domain.enums.EnumWithValue;
+
+public enum FormType implements EnumWithValue {
 
     Register("", ""),
     Entrepreneur("", ""),
@@ -67,5 +70,10 @@ public enum FormType {
 
     public void setFormDesc(String formDesc) {
         this.formDesc = formDesc;
+    }
+
+    @Override
+    public String getValue() {
+        return formDesc;
     }
 }
