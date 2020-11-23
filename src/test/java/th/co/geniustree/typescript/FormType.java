@@ -72,7 +72,6 @@ public enum FormType implements EnumWithValue {
         this.formDesc = formDesc;
     }
 
-    @Override
     public String getValue() {
         return formDesc;
     }
