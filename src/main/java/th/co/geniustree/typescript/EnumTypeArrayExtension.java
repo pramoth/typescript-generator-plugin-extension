@@ -10,7 +10,7 @@ import java.lang.reflect.Method;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
-public class EnumTypeAliasExtension extends EmitterExtension {
+public class EnumTypeArrayExtension extends EmitterExtension {
     private static Logger logger = new Logger();
 
     @Override
@@ -21,9 +21,6 @@ public class EnumTypeAliasExtension extends EmitterExtension {
 
     @Override
     public void emitElements(Writer writer, Settings settings, boolean exportKeyword, TsModel model) {
-        String enums = model.getTypeAliases().stream().map(e -> "\"" + e.getName().getSimpleName() + "\"").collect(Collectors.joining(" | "));
-        writer.writeIndentedLine("export type AllEnumClass = " + enums);
-        writer.writeIndentedLine("// Enum description");
         String result = model.getTypeAliases().stream()
                 .filter(e -> e.getOrigin() != null)
                 .map(e -> {
@@ -32,7 +29,7 @@ public class EnumTypeAliasExtension extends EmitterExtension {
                     if (enumObject == null) {
                         return "//skip " + e.getName().getSimpleName() + " because it not have getValue() method";
                     } else {
-                        return "export const " + e.getOrigin().getSimpleName() + " : {[p in " + e.getName().getSimpleName() + "] : string } = {\n" + enumObject + "\n}";
+                        return "export const " + e.getOrigin().getSimpleName() + "Array : " + e.getName().getSimpleName() + "[]  = [" + enumObject + "]";
                     }
                 }).collect(Collectors.joining("\n"));
         writer.writeIndentedLine(result);
@@ -42,21 +39,16 @@ public class EnumTypeAliasExtension extends EmitterExtension {
         try {
             Object[] values = (Object[]) clazz.getMethod("values", null).invoke(null);
             Method getNameMethod = clazz.getMethod("name", null);
-            try {
-                Method getValueMethod = clazz.getMethod("getValue", null);
-                return Stream.of(values).map(value -> getRow(getNameMethod, getValueMethod, value)).collect(Collectors.joining(",\n"));
-            } catch (NoSuchMethodException e) {
-                return null;
-            }
+            return Stream.of(values).map(value -> getRow(getNameMethod, value)).collect(Collectors.joining(","));
         } catch (Exception e) {
             throw new RuntimeException(e);
         }
 
     }
 
-    private String getRow(Method getNameMethod, Method getValueMethod, Object value) {
+    private String getRow(Method getNameMethod, Object value) {
         try {
-            return "   " + getNameMethod.invoke(value) + ":'" + getValueMethod.invoke(value) + "'";
+            return "'" + getNameMethod.invoke(value) + "'";
         } catch (Exception e) {
             throw new RuntimeException(e);
         }
