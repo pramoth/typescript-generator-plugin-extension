@@ -32,9 +32,11 @@ public class BeanValidatorExtension extends EmitterExtension {
                         return "//skip " + e.getName().getSimpleName() + " because it not have getValue() method";
                     } else {
                         if(!enumObject.isBlank()){
-                            return "export const " + e.getOrigin().getSimpleName() + "s = { " + enumObject + "}";
+                            String tsVariableName = e.getOrigin().getSimpleName()+"s";
+                            String comment = "// const "+tsVariableName+" is validation constraint for java class "+e.getOrigin().getSimpleName()+" \n";
+                            return comment+"export const " + tsVariableName + " = { " + enumObject + "}";
                         }else{
-                            return "//skip " + e.getName().getSimpleName() + ". no validator annotation found";
+                            return "//skip " + e.getName().getSimpleName() + " java class. no validator annotation found";
                         }
                     }
                 }).collect(Collectors.joining("\n"));
