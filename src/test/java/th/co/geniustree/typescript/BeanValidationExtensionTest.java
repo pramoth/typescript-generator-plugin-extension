@@ -20,4 +20,12 @@ public class BeanValidationExtensionTest {
         final String output = new TypeScriptGenerator(settings).generateTypeScript(Input.from(MyBean.class));
         System.out.println(output);
     }
+
+    @Test
+    public void empty(){
+        final Settings settings = TestUtils.settings();
+        settings.extensions.add(new BeanValidatorExtension());
+        final String output = new TypeScriptGenerator(settings).generateTypeScript(Input.from(EmptyBean.class));
+        System.out.println(output);
+    }
 }

@@ -31,7 +31,11 @@ public class BeanValidatorExtension extends EmitterExtension {
                     if (enumObject == null) {
                         return "//skip " + e.getName().getSimpleName() + " because it not have getValue() method";
                     } else {
-                        return "export const " + e.getOrigin().getSimpleName() + "s = { " + enumObject + "}";
+                        if(!enumObject.isBlank()){
+                            return "export const " + e.getOrigin().getSimpleName() + "s = { " + enumObject + "}";
+                        }else{
+                            return "//skip " + e.getName().getSimpleName() + ". no validator annotation found";
+                        }
                     }
                 }).collect(Collectors.joining("\n"));
         writer.writeIndentedLine(result);
