@@ -4,7 +4,7 @@
 
     <groupId>th.co.geniustree.typescript</groupId>
     <artifactId>typescript-generator-plugin-extension</artifactId>
-    <version>1.2.1</version>
+    <version>1.2.2-SNAPSHOT</version>
     <distributionManagement>
         <repository>
             <id>Geniustree Release</id>
@@ -19,7 +19,7 @@
         <connection>scm:git:git@github.com:pramoth/typescript-generator-plugin-extension.git</connection>
         <developerConnection>scm:git:git@github.com:pramoth/typescript-generator-plugin-extension.git</developerConnection>
         <url>scm:git:git@github.com:pramoth/typescript-generator-plugin-extension.git</url>
-        <tag>typescript-generator-plugin-extension-1.2.1</tag>
+        <tag>typescript-generator-plugin-extension-1.0.5</tag>
     </scm>
     <dependencies>
         <dependency>
