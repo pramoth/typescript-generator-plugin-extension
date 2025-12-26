@@ -20,4 +20,12 @@ public class EnumTypeAliasExtensionTest {
         final String output = new TypeScriptGenerator(settings).generateTypeScript(Input.from(NoValueEnum.class));
         System.out.println(output);
     }
+
+    @Test
+    public void empty(){
+        final Settings settings = TestUtils.settings();
+        settings.extensions.add(new EnumTypeAliasExtension());
+        final String output = new TypeScriptGenerator(settings).generateTypeScript(Input.from(EmptyBean.class));
+        System.out.println(output);
+    }
 }

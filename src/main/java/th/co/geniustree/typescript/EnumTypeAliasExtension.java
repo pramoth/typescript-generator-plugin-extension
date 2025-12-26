@@ -22,7 +22,9 @@ public class EnumTypeAliasExtension extends EmitterExtension {
     @Override
     public void emitElements(Writer writer, Settings settings, boolean exportKeyword, TsModel model) {
         String enums = model.getTypeAliases().stream().map(e -> "\"" + e.getName().getSimpleName() + "\"").collect(Collectors.joining(" | "));
-        writer.writeIndentedLine("export type AllEnumClass = " + enums);
+        if(!enums.isEmpty()){
+            writer.writeIndentedLine("export type AllEnumClass = " + enums);
+        }
         writer.writeIndentedLine("// Enum description");
         String result = model.getTypeAliases().stream()
                 .filter(e -> e.getOrigin() != null)
