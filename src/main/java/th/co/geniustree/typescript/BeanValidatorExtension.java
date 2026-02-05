@@ -52,7 +52,8 @@ public class BeanValidatorExtension extends EmitterExtension {
                             e.getAnnotation(Max.class) != null ||
                             e.getAnnotation(NotBlank.class) != null ||
                             e.getAnnotation(NotNull.class) != null ||
-                            e.getAnnotation(Digits.class) != null
+                            e.getAnnotation(Digits.class) != null ||
+                            e.getAnnotation(Email.class) != null
                             )
                     .forEach(e -> {
                         builder.append(e.getName());
@@ -63,6 +64,7 @@ public class BeanValidatorExtension extends EmitterExtension {
                         builder.append(doNotBlankAnnotation(e));
                         builder.append(doNotNullAnnotation(e));
                         builder.append(doDigitsAnnotation(e));
+                        builder.append(doEmailAnnotation(e));
                         builder.append("},");
                     });
             return builder.toString();
@@ -116,6 +118,13 @@ public class BeanValidatorExtension extends EmitterExtension {
         Size annotation = declaredField.getAnnotation(Size.class);
         if (annotation != null) {
             return "sizeMin:" + annotation.min() + ",sizeMax:" + annotation.max() + ",";
+        }
+        return "";
+    }
+    private String doEmailAnnotation(Field declaredField) {
+        Email annotation = declaredField.getAnnotation(Email.class);
+        if (annotation != null) {
+            return "email:\"" + annotation.message() + ",";
         }
         return "";
     }

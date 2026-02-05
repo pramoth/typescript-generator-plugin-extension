@@ -19,6 +19,9 @@ public class MyBean {
     @Digits(integer = 2,fraction = 2)
     private BigDecimal decimal;
 
+    @Email(message = "xxx")
+    private String email;
+
     public String getName() {
         return name;
     }
